@@ -1,0 +1,14 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: gua14382
+      user: dbt
+      password: User@2User@2
+      role: ACCOUNTADMIN
+      database: ANALYTICS
+      warehouse: COMPUTE_WH
+      schema: DBT
+      threads: 10
+      client_session_keep_alive: False
