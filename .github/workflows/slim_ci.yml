@@ -1,6 +1,7 @@
 name: Trigger dbt cloud job
 on:
-  - pull_request
+  pull_request:
+    branches: [master]
 
 jobs:
   prep:
