@@ -1,0 +1,30 @@
+name: Trigger dbt Cloud
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  run:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 15
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Trigger dbt Cloud job
+        run: |
+          output=$(curl -X POST --fail \
+            --header "Authorization: Token ${DBT_API_KEY}" \
+            --header "Content-Type: application/json" \
+            --data '{"cause": "Commit '"${GIT_SHA}"'"}' \
+            https://cloud.getdbt.com/api/v2/accounts/${ACCOUNT_ID}/jobs/${JOB_ID}/run/)
+
+          echo "Triggered dbt Cloud run at:"
+          echo ${output} | jq -r .data.href
+        env:
+          DBT_API_KEY: ${{ secrets.DBTCLOUDAPIKEY }}
+          ACCOUNT_ID: 43868 # dbt account id
+          JOB_ID: 53468 # dbt job id of the production tables
+          GIT_SHA: "${{ github.ref == 'refs/heads/master' && github.sha || github.event.pull_request.head.sha }}"
