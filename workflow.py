@@ -12,7 +12,7 @@ JOB_ID = 53468
 # Store your dbt Cloud API token securely in your workflow tool
 #API_KEY = 'ed55e85c1b1a00cdbe6dc5ad34a934cd59c31cdb'
 
-API_KEY = os.environ['DBTCLOUDAPIKEY'] #this is working
+API_KEY = os.environ['DBTCLOUDAPIKEY']
 
 # These are documented on the dbt Cloud API docs
 class DbtJobRunStatus(enum.IntEnum):
