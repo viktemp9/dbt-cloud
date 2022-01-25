@@ -23,6 +23,8 @@ jobs:
         python-version: 3.8
 
     - name: Execute Test Script
+      env:
+        DBTCLOUDAPIKEY: ${{ secrets.DBTCLOUDAPIKEY }}
       run: |
         pip install requests
         python3 workflow.py

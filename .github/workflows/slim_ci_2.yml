@@ -2,7 +2,7 @@ name: Trigger dbt Cloud
 
 on:
   pull_request:
-    branches: [master]
+    branches: [dev]
 
 jobs:
   run:
