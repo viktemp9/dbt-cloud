@@ -1,7 +1,7 @@
 name: Trigger dbt cloud job
 on:
   pull_request:
-    branches: [dev]
+    branches: [master]
 
 jobs:
   prep:
@@ -13,3 +13,18 @@ jobs:
         STATUSCODE=$(echo "$RESPONSE" | jq '.status.code')
         echo "$RESPONSE" | jq '.status.user_message'
         if [[ $STATUSCODE != 200 ]]; then echo "$RESPONSE" && bash -c "exit 1"; fi
+
+    - name: Checkout
+      uses: actions/checkout@v2.3.4
+  
+    - name: Setup Python
+      uses: actions/setup-python@v2.2.2
+      with:
+        python-version: 3.8
+
+    - name: Execute Test Script
+      env:
+        DBTCLOUDAPIKEY: ${{ secrets.DBTCLOUDAPIKEY }}
+      run: |
+        pip install requests
+        python3 workflow.py
