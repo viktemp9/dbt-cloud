@@ -68,8 +68,7 @@ def run():
 
         status = _get_job_run_status(job_run_id)
 
-        job_status = str(DbtJobRunStatus(status))
-        print(job_status.replace('DbtJobRunStatus.',''))
+        print(DbtJobRunStatus(status))
 
         if status == DbtJobRunStatus.SUCCESS:
             break
