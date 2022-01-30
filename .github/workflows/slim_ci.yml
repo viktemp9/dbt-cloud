@@ -15,7 +15,7 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Execute Test Script
+    - name: Execute Python Script
       env:
         DBTCLOUDAPIKEY: ${{ secrets.DBTCLOUDAPIKEY }}
       run: |
